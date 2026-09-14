@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+<!-- App manifest: declares permissions, application setup, and app screens. -->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <!-- Allows Retrofit/OkHttp to call the NIT3213 API. -->
     <uses-permission android:name="android.permission.INTERNET" />
-
-
 
     <application
         android:name=".Nit3213Application"
@@ -16,16 +15,23 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.S8133896assignment2">
+
+        <!-- Dashboard shown after successful API authentication. -->
+        <activity android:name=".DashboardActivity" />
+
+        <!-- Launcher screen shown when the app starts. -->
         <activity
             android:name=".MainActivity"
             android:exported="true"
             android:windowSoftInputMode="adjustResize">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
     </application>
 
 </manifest>

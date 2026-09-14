@@ -1,5 +1,6 @@
 package com.example.s8133896assignment2
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
@@ -16,21 +17,32 @@ import com.example.s8133896assignment2.ui.login.LoginViewModel
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
+/**
+ * Login screen for the NIT3213 Assignment 2 application.
+ *
+ * The user enters their student ID and case-sensitive first name.
+ * A successful Footscray API login returns a keypass, which is passed
+ * to DashboardActivity to request the correct dashboard data.
+ */
 class MainActivity : AppCompatActivity() {
 
+    // Koin injects the LoginViewModel and its AuthRepository dependency.
     private val loginViewModel: LoginViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        // Keeps the app compatible with edge-to-edge Android displays.
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
 
+        // Connect XML views to Kotlin variables.
         val studentIdInput = findViewById<EditText>(R.id.editTextStudentId)
         val firstNameInput = findViewById<EditText>(R.id.editTextFirstName)
         val loginButton = findViewById<Button>(R.id.buttonLogin)
         val progressBar = findViewById<ProgressBar>(R.id.progressBarLogin)
 
+        // Validate input before calling the authentication API.
         loginButton.setOnClickListener {
             val studentId = studentIdInput.text.toString().trim()
             val firstName = firstNameInput.text.toString().trim()
@@ -47,9 +59,11 @@ class MainActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
+            // Calls POST /footscray/auth through the ViewModel and repository.
             loginViewModel.login(studentId, firstName)
         }
 
+        // Observe LoginViewModel state only while this Activity is visible.
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 loginViewModel.uiState.collect { state ->
@@ -68,11 +82,18 @@ class MainActivity : AppCompatActivity() {
                             progressBar.visibility = View.GONE
                             loginButton.isEnabled = true
 
-                            Toast.makeText(
+                            // Pass API keypass to DashboardActivity.
+                            val dashboardIntent = Intent(
                                 this@MainActivity,
-                                "Keypass: ${state.keypass}",
-                                Toast.LENGTH_LONG
-                            ).show()
+                                DashboardActivity::class.java
+                            )
+
+                            dashboardIntent.putExtra(
+                                DashboardActivity.EXTRA_KEYPASS,
+                                state.keypass
+                            )
+
+                            startActivity(dashboardIntent)
                         }
 
                         is LoginUiState.Error -> {
