@@ -5,11 +5,16 @@ import com.example.s8133896assignment2.data.model.AuthResponse
 import com.example.s8133896assignment2.data.remote.Nit3213Api
 import retrofit2.Response
 
+/**
+ * Production authentication repository.
+ *
+ * It sends the entered student ID and first name to the Footscray API.
+ */
 class AuthRepository(
     private val api: Nit3213Api
-) {
+) : AuthRepositoryInterface {
 
-    suspend fun login(
+    override suspend fun login(
         studentId: String,
         firstName: String
     ): Response<AuthResponse> {

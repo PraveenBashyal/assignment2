@@ -2,7 +2,7 @@ package com.example.s8133896assignment2.ui.login
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.s8133896assignment2.data.repository.AuthRepository
+import com.example.s8133896assignment2.data.repository.AuthRepositoryInterface
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -16,7 +16,7 @@ sealed interface LoginUiState {
 }
 
 class LoginViewModel(
-    private val repository: AuthRepository
+    private val repository: AuthRepositoryInterface
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow<LoginUiState>(LoginUiState.Idle)
