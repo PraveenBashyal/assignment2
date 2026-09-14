@@ -7,8 +7,13 @@ import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
+import com.example.s8133896assignment2.data.repository.AuthRepository
 
 val appModule = module {
+
+    single {
+        AuthRepository(get())
+    }
 
     single {
         HttpLoggingInterceptor().apply {
