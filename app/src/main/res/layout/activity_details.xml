@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Details screen showing all information for one selected Fitness exercise. -->
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F7F9FC"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <!-- Selected exercise name. -->
+        <TextView
+            android:id="@+id/textViewDetailsExerciseName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#1B1F23"
+            android:textSize="28sp"
+            android:textStyle="bold" />
+
+        <!-- Exercise muscle group. -->
+        <TextView
+            android:id="@+id/textViewDetailsMuscleGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:textColor="#4A4F55"
+            android:textSize="17sp" />
+
+        <!-- Required equipment. -->
+        <TextView
+            android:id="@+id/textViewDetailsEquipment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:textColor="#4A4F55"
+            android:textSize="17sp" />
+
+        <!-- Exercise difficulty level. -->
+        <TextView
+            android:id="@+id/textViewDetailsDifficulty"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:textColor="#4A4F55"
+            android:textSize="17sp" />
+
+        <!-- Calories burned per hour. -->
+        <TextView
+            android:id="@+id/textViewDetailsCalories"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:textColor="#4A4F55"
+            android:textSize="17sp" />
+
+        <!-- Description heading. -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:text="Description"
+            android:textColor="#1B1F23"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <!-- Full description is intentionally displayed on Details, not Dashboard. -->
+        <TextView
+            android:id="@+id/textViewDetailsDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:lineSpacingExtra="4dp"
+            android:textColor="#4A4F55"
+            android:textSize="17sp" />
+
+    </LinearLayout>
+
+</ScrollView>

@@ -16,10 +16,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.S8133896assignment2">
 
-        <!-- Dashboard shown after successful API authentication. -->
+        <!-- Third required screen: shows all selected exercise data. -->
+        <activity android:name=".DetailsActivity" />
+
+        <!-- Second required screen: displays Fitness Dashboard entities. -->
         <activity android:name=".DashboardActivity" />
 
-        <!-- Launcher screen shown when the app starts. -->
+        <!-- First required screen and launcher Activity. -->
         <activity
             android:name=".MainActivity"
             android:exported="true"

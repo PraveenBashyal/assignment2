@@ -1,10 +1,10 @@
 package com.example.s8133896assignment2
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.ProgressBar
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,13 +17,12 @@ import org.koin.android.ext.android.inject
 /**
  * Dashboard screen for Fitness exercises.
  *
- * It uses the keypass returned by LoginViewModel to request the appropriate
- * dashboard data, then displays the exercise summaries in a RecyclerView.
- * Descriptions are excluded here and will appear on the Details screen.
+ * It loads Fitness entities with the keypass returned after Login, displays
+ * summary data in a RecyclerView, and opens DetailsActivity when an item is tapped.
  */
 class DashboardActivity : AppCompatActivity() {
 
-    // Koin injects the repository containing the Retrofit dashboard request.
+    // Koin injects the API repository.
     private val dashboardRepository: DashboardRepository by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,10 +35,9 @@ class DashboardActivity : AppCompatActivity() {
         val exercisesRecyclerView =
             findViewById<RecyclerView>(R.id.recyclerViewExercises)
 
-        // RecyclerView needs a layout manager before it can display items.
         exercisesRecyclerView.layoutManager = LinearLayoutManager(this)
 
-        // Read the keypass sent from MainActivity after a successful login.
+        // The keypass identifies the user's assigned Dashboard topic.
         val keypass = intent.getStringExtra(EXTRA_KEYPASS)
 
         if (keypass.isNullOrBlank()) {
@@ -49,7 +47,7 @@ class DashboardActivity : AppCompatActivity() {
             return
         }
 
-        // Load Dashboard data without blocking the user interface.
+        // Fetch dashboard entities without blocking the UI.
         lifecycleScope.launch {
             try {
                 val response = dashboardRepository.getDashboard(keypass)
@@ -64,12 +62,43 @@ class DashboardActivity : AppCompatActivity() {
                     exercisesRecyclerView.adapter = FitnessAdapter(
                         exercises = dashboard.entities,
                         onExerciseClicked = { exercise ->
-                            // Temporary tap test. DetailsActivity is added next.
-                            Toast.makeText(
+                            // Pass the complete selected entity to DetailsActivity.
+                            val detailsIntent = Intent(
                                 this@DashboardActivity,
-                                "Selected: ${exercise.exerciseName}",
-                                Toast.LENGTH_SHORT
-                            ).show()
+                                DetailsActivity::class.java
+                            )
+
+                            detailsIntent.putExtra(
+                                DetailsActivity.EXTRA_EXERCISE_NAME,
+                                exercise.exerciseName
+                            )
+
+                            detailsIntent.putExtra(
+                                DetailsActivity.EXTRA_MUSCLE_GROUP,
+                                exercise.muscleGroup
+                            )
+
+                            detailsIntent.putExtra(
+                                DetailsActivity.EXTRA_EQUIPMENT,
+                                exercise.equipment
+                            )
+
+                            detailsIntent.putExtra(
+                                DetailsActivity.EXTRA_DIFFICULTY,
+                                exercise.difficulty
+                            )
+
+                            detailsIntent.putExtra(
+                                DetailsActivity.EXTRA_CALORIES,
+                                exercise.caloriesBurnedPerHour
+                            )
+
+                            detailsIntent.putExtra(
+                                DetailsActivity.EXTRA_DESCRIPTION,
+                                exercise.description
+                            )
+
+                            startActivity(detailsIntent)
                         }
                     )
                 } else {
@@ -88,7 +117,7 @@ class DashboardActivity : AppCompatActivity() {
     }
 
     companion object {
-        // Intent key used to receive the API keypass from MainActivity.
+        // Intent key used to receive the login keypass from MainActivity.
         const val EXTRA_KEYPASS = "extra_keypass"
     }
 }
