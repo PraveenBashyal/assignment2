@@ -70,12 +70,9 @@ class MainActivity : AppCompatActivity() {
 
                             Toast.makeText(
                                 this@MainActivity,
-                                "Login successful. Loading dashboard...",
-                                Toast.LENGTH_SHORT
+                                "Keypass: ${state.keypass}",
+                                Toast.LENGTH_LONG
                             ).show()
-
-                            // Dashboard navigation is added in the next step.
-                            // state.keypass contains the API keypass needed for it.
                         }
 
                         is LoginUiState.Error -> {

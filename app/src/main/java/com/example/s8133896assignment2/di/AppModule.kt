@@ -2,6 +2,7 @@ package com.example.s8133896assignment2.di
 
 import com.example.s8133896assignment2.data.remote.Nit3213Api
 import com.example.s8133896assignment2.data.repository.AuthRepository
+import com.example.s8133896assignment2.data.repository.DashboardRepository
 import com.example.s8133896assignment2.ui.login.LoginViewModel
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -41,6 +42,10 @@ val appModule = module {
 
     single {
         AuthRepository(get())
+    }
+
+    single {
+        DashboardRepository(get())
     }
 
     viewModel {
