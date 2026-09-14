@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- One summary card displayed in the Fitness Dashboard RecyclerView. -->
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="12dp"
+    android:clickable="true"
+    android:focusable="true"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="2dp"
+    app:strokeColor="#E1E5EA"
+    app:strokeWidth="1dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Primary exercise name. -->
+        <TextView
+            android:id="@+id/textViewExerciseName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#1B1F23"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <!-- Fitness summary fields; description is intentionally excluded. -->
+        <TextView
+            android:id="@+id/textViewMuscleGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textColor="#4A4F55"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/textViewEquipment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:textColor="#4A4F55"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/textViewDifficulty"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:textColor="#4A4F55"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/textViewCalories"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:textColor="#4A4F55"
+            android:textSize="15sp" />
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

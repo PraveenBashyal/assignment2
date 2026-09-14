@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Dashboard screen showing Fitness exercises returned by the API. -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F7F9FC"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- Screen heading and count of entities returned by the API. -->
+    <TextView
+        android:id="@+id/textViewDashboardTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Fitness Dashboard"
+        android:textColor="#1B1F23"
+        android:textSize="26sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textViewEntityTotal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="Loading exercises..."
+        android:textColor="#5F6368"
+        android:textSize="15sp" />
+
+    <!-- Shown while GET /dashboard/fitness is loading. -->
+    <ProgressBar
+        android:id="@+id/progressBarDashboard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="24dp" />
+
+    <!-- Shows a network/API error when dashboard data cannot be loaded. -->
+    <TextView
+        android:id="@+id/textViewDashboardError"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:textColor="#B3261E"
+        android:textSize="16sp"
+        android:visibility="gone" />
+
+    <!-- Required list of Dashboard entity summaries. -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewExercises"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="12dp"
+        android:layout_weight="1" />
+
+</LinearLayout>
