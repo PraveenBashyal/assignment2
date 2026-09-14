@@ -3,6 +3,7 @@ package com.example.s8133896assignment2.di
 import com.example.s8133896assignment2.data.remote.Nit3213Api
 import com.example.s8133896assignment2.data.repository.AuthRepository
 import com.example.s8133896assignment2.data.repository.DashboardRepository
+import com.example.s8133896assignment2.ui.dashboard.DashboardViewModel
 import com.example.s8133896assignment2.ui.login.LoginViewModel
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -12,6 +13,10 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
+/**
+ * Koin dependency-injection definitions for networking, repositories,
+ * and ViewModels.
+ */
 val appModule = module {
 
     single {
@@ -50,5 +55,9 @@ val appModule = module {
 
     viewModel {
         LoginViewModel(get())
+    }
+
+    viewModel {
+        DashboardViewModel(get())
     }
 }

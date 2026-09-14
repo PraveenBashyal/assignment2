@@ -6,24 +6,27 @@ import android.view.View
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.s8133896assignment2.data.repository.DashboardRepository
+import com.example.s8133896assignment2.ui.dashboard.DashboardUiState
+import com.example.s8133896assignment2.ui.dashboard.DashboardViewModel
 import com.example.s8133896assignment2.ui.dashboard.FitnessAdapter
 import kotlinx.coroutines.launch
-import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /**
- * Dashboard screen for Fitness exercises.
+ * Displays the Fitness Dashboard.
  *
- * It loads Fitness entities with the keypass returned after Login, displays
- * summary data in a RecyclerView, and opens DetailsActivity when an item is tapped.
+ * The DashboardViewModel requests dashboard data through an injected
+ * DashboardRepository. This Activity observes UI state and updates views.
  */
 class DashboardActivity : AppCompatActivity() {
 
-    // Koin injects the API repository.
-    private val dashboardRepository: DashboardRepository by inject()
+    // Koin provides the ViewModel with its injected DashboardRepository.
+    private val dashboardViewModel: DashboardViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,7 +40,7 @@ class DashboardActivity : AppCompatActivity() {
 
         exercisesRecyclerView.layoutManager = LinearLayoutManager(this)
 
-        // The keypass identifies the user's assigned Dashboard topic.
+        // The keypass is passed from MainActivity after successful login.
         val keypass = intent.getStringExtra(EXTRA_KEYPASS)
 
         if (keypass.isNullOrBlank()) {
@@ -47,77 +50,101 @@ class DashboardActivity : AppCompatActivity() {
             return
         }
 
-        // Fetch dashboard entities without blocking the UI.
+        // Render dashboard state only when this Activity is visible.
         lifecycleScope.launch {
-            try {
-                val response = dashboardRepository.getDashboard(keypass)
-
-                if (response.isSuccessful && response.body() != null) {
-                    val dashboard = response.body()!!
-
-                    progressBar.visibility = View.GONE
-                    entityTotalText.text =
-                        "Exercises available: ${dashboard.entityTotal}"
-
-                    exercisesRecyclerView.adapter = FitnessAdapter(
-                        exercises = dashboard.entities,
-                        onExerciseClicked = { exercise ->
-                            // Pass the complete selected entity to DetailsActivity.
-                            val detailsIntent = Intent(
-                                this@DashboardActivity,
-                                DetailsActivity::class.java
-                            )
-
-                            detailsIntent.putExtra(
-                                DetailsActivity.EXTRA_EXERCISE_NAME,
-                                exercise.exerciseName
-                            )
-
-                            detailsIntent.putExtra(
-                                DetailsActivity.EXTRA_MUSCLE_GROUP,
-                                exercise.muscleGroup
-                            )
-
-                            detailsIntent.putExtra(
-                                DetailsActivity.EXTRA_EQUIPMENT,
-                                exercise.equipment
-                            )
-
-                            detailsIntent.putExtra(
-                                DetailsActivity.EXTRA_DIFFICULTY,
-                                exercise.difficulty
-                            )
-
-                            detailsIntent.putExtra(
-                                DetailsActivity.EXTRA_CALORIES,
-                                exercise.caloriesBurnedPerHour
-                            )
-
-                            detailsIntent.putExtra(
-                                DetailsActivity.EXTRA_DESCRIPTION,
-                                exercise.description
-                            )
-
-                            startActivity(detailsIntent)
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                dashboardViewModel.uiState.collect { state ->
+                    when (state) {
+                        DashboardUiState.Loading -> {
+                            progressBar.visibility = View.VISIBLE
+                            errorText.visibility = View.GONE
                         }
-                    )
-                } else {
-                    progressBar.visibility = View.GONE
-                    errorText.visibility = View.VISIBLE
-                    errorText.text =
-                        "Unable to load dashboard. HTTP code: ${response.code()}"
+
+                        is DashboardUiState.Success -> {
+                            progressBar.visibility = View.GONE
+                            errorText.visibility = View.GONE
+
+                            entityTotalText.text =
+                                "Exercises available: ${state.dashboard.entityTotal}"
+
+                            exercisesRecyclerView.adapter = FitnessAdapter(
+                                exercises = state.dashboard.entities,
+                                onExerciseClicked = { exercise ->
+                                    openDetailsScreen(
+                                        exerciseName = exercise.exerciseName,
+                                        muscleGroup = exercise.muscleGroup,
+                                        equipment = exercise.equipment,
+                                        difficulty = exercise.difficulty,
+                                        calories = exercise.caloriesBurnedPerHour,
+                                        description = exercise.description
+                                    )
+                                }
+                            )
+                        }
+
+                        is DashboardUiState.Error -> {
+                            progressBar.visibility = View.GONE
+                            errorText.visibility = View.VISIBLE
+                            errorText.text = state.message
+                        }
+                    }
                 }
-            } catch (exception: Exception) {
-                progressBar.visibility = View.GONE
-                errorText.visibility = View.VISIBLE
-                errorText.text =
-                    "Network error while loading dashboard. Please try again."
             }
         }
+
+        // Start the API request after observer setup.
+        dashboardViewModel.loadDashboard(keypass)
+    }
+
+    /**
+     * Opens the Details screen and transfers every field of the selected
+     * Fitness entity, including its detailed description.
+     */
+    private fun openDetailsScreen(
+        exerciseName: String,
+        muscleGroup: String,
+        equipment: String,
+        difficulty: String,
+        calories: Double,
+        description: String
+    ) {
+        val detailsIntent = Intent(this, DetailsActivity::class.java)
+
+        detailsIntent.putExtra(
+            DetailsActivity.EXTRA_EXERCISE_NAME,
+            exerciseName
+        )
+
+        detailsIntent.putExtra(
+            DetailsActivity.EXTRA_MUSCLE_GROUP,
+            muscleGroup
+        )
+
+        detailsIntent.putExtra(
+            DetailsActivity.EXTRA_EQUIPMENT,
+            equipment
+        )
+
+        detailsIntent.putExtra(
+            DetailsActivity.EXTRA_DIFFICULTY,
+            difficulty
+        )
+
+        detailsIntent.putExtra(
+            DetailsActivity.EXTRA_CALORIES,
+            calories
+        )
+
+        detailsIntent.putExtra(
+            DetailsActivity.EXTRA_DESCRIPTION,
+            description
+        )
+
+        startActivity(detailsIntent)
     }
 
     companion object {
-        // Intent key used to receive the login keypass from MainActivity.
+        // Intent key for the API keypass received from MainActivity.
         const val EXTRA_KEYPASS = "extra_keypass"
     }
 }
