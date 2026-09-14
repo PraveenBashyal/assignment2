@@ -1,19 +1,17 @@
 package com.example.s8133896assignment2.di
 
 import com.example.s8133896assignment2.data.remote.Nit3213Api
+import com.example.s8133896assignment2.data.repository.AuthRepository
+import com.example.s8133896assignment2.ui.login.LoginViewModel
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
-import com.example.s8133896assignment2.data.repository.AuthRepository
 
 val appModule = module {
-
-    single {
-        AuthRepository(get())
-    }
 
     single {
         HttpLoggingInterceptor().apply {
@@ -39,5 +37,13 @@ val appModule = module {
 
     single {
         get<Retrofit>().create(Nit3213Api::class.java)
+    }
+
+    single {
+        AuthRepository(get())
+    }
+
+    viewModel {
+        LoginViewModel(get())
     }
 }
