@@ -124,7 +124,7 @@ app/src/main/java/com/example/s8133896assignment2/
 ├── DashboardActivity.kt
 ├── DetailsActivity.kt
 └── Nit3213Application.kt
-
+'''
 
 ## How to Build and Run
 
