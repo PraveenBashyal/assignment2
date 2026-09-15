@@ -106,7 +106,7 @@ Koin is used to provide application dependencies, including:
 
 ## Project Structure
 
-```text
+
 app/src/main/java/com/example/s8133896assignment2/
 ├── data/
 │   ├── model/
