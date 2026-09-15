@@ -10,7 +10,7 @@ The application connects to the NIT3213 API to authenticate a user, retrieve a d
 ### Login Screen
 
 - Provides input fields for a student ID and first name.
-- Uses the student ID without the `s` prefix as the username.
+- Uses the student ID without the (s) prefix as the username.
 - Uses the student's first name as the password.
 - Sends a POST request to the Footscray authentication endpoint.
 - Displays validation and network error messages when login is unsuccessful.
@@ -18,7 +18,7 @@ The application connects to the NIT3213 API to authenticate a user, retrieve a d
 
 ### Dashboard Screen
 
-- Uses the `keypass` returned from successful authentication.
+- Uses the keypass returned from successful authentication.
 - Sends a GET request to the dashboard API endpoint.
 - Displays the number of available exercise entities.
 - Uses a RecyclerView to show a list of fitness exercises.
@@ -124,7 +124,7 @@ app/src/main/java/com/example/s8133896assignment2/
 ├── DashboardActivity.kt
 ├── DetailsActivity.kt
 └── Nit3213Application.kt
-```
+
 
 ## How to Build and Run
 
@@ -145,12 +145,12 @@ app/src/main/java/com/example/s8133896assignment2/
 
 4. Connect an Android device or start an Android emulator.
 
-5. Select the `app` run configuration.
+5. Select the app run configuration.
 
 6. Click the Run button in Android Studio.
 
 7. On the Login screen, enter:
-    - Student ID: enter the numeric ID without the `s` prefix.
+    - Student ID: enter the numeric ID without the s prefix.
     - First name: enter the first name with the correct capitalisation.
 
 8. Tap the login button.
@@ -188,20 +188,20 @@ Manual test cases include:
 
 
 
-Local unit tests are included for `LoginViewModel`.
+Local unit tests are included for LoginViewModel.
 
 The tests verify that:
 
-- A blank student ID produces the message: `Please enter your student ID.`
-- A blank first name produces the message: `Please enter your first name.`
+- A blank student ID produces the message: Please enter your student ID.
+- A blank first name produces the message: Please enter your first name.
 
-The tests use a fake implementation of `AuthRepositoryInterface`. This isolates the ViewModel from Retrofit and the live NIT3213 API, so no network request is made while unit tests run.
+The tests use a fake implementation of AuthRepositoryInterface. This isolates the ViewModel from Retrofit and the live NIT3213 API, so no network request is made while unit tests run.
 
 To run the tests in Android Studio:
 
-1. Open `LoginViewModelTest.kt` under `app/src/test/java`.
-2. Click the green run icon next to `LoginViewModelTest`.
-3. Select Run 'LoginViewModelTest'
+1. Open `LoginViewModelTest.kt` under app/src/test/java.
+2. Click the green run icon next to LoginViewModelTest.
+3. Select Run LoginViewModelTest.
 
 ## Git Version Control
 
