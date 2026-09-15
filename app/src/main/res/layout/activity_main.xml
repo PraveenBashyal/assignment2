@@ -1,20 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Login screen for NIT3213 Fitness Dashboard authentication. -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/loginRoot"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F7F9FC"
+    android:background="#F8F5FC"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    android:padding="24dp">
+    android:paddingStart="24dp"
+    android:paddingTop="48dp"
+    android:paddingEnd="24dp"
+    android:paddingBottom="24dp">
+
+    <!-- Simple fitness-themed header. -->
+    <TextView
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:background="#6A1B9A"
+        android:gravity="center"
+        android:text="FIT"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/textViewTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="72dp"
-        android:text="NIT3213 Login"
-        android:textColor="#1B1F23"
+        android:layout_marginTop="20dp"
+        android:text="Fitness Dashboard"
+        android:textColor="#2D1B45"
         android:textSize="30sp"
         android:textStyle="bold" />
 
@@ -22,40 +37,70 @@
         android:id="@+id/textViewInstructions"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="10dp"
         android:gravity="center"
-        android:text="Enter your student ID and first name to continue."
-        android:textColor="#5F6368"
+        android:text="Sign in using your student ID and first name."
+        android:textColor="#67576F"
         android:textSize="16sp" />
 
-    <EditText
-        android:id="@+id/editTextStudentId"
+    <!-- Card-style area for login fields. -->
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:autofillHints="username"
-        android:hint="Student ID"
-        android:inputType="number"
-        android:maxLength="8"
-        android:singleLine="true" />
+        android:layout_marginTop="36dp"
+        android:background="#FFFFFF"
+        android:elevation="4dp"
+        android:orientation="vertical"
+        android:padding="20dp">
 
-    <EditText
-        android:id="@+id/editTextFirstName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:autofillHints="name"
-        android:hint="First name"
-        android:inputType="textPersonName|textCapWords"
-        android:singleLine="true" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Welcome back"
+            android:textColor="#2D1B45"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
-    <Button
-        android:id="@+id/buttonLogin"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:text="Login"
-        android:textAllCaps="false" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Enter your details to access your exercises."
+            android:textColor="#67576F"
+            android:textSize="14sp" />
+
+        <EditText
+            android:id="@+id/editTextStudentId"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:autofillHints="username"
+            android:hint="Student ID (numbers only)"
+            android:inputType="number"
+            android:maxLength="8"
+            android:singleLine="true" />
+
+        <EditText
+            android:id="@+id/editTextFirstName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:autofillHints="name"
+            android:hint="First name"
+            android:inputType="textPersonName|textCapWords"
+            android:singleLine="true" />
+
+        <Button
+            android:id="@+id/buttonLogin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:backgroundTint="#6A1B9A"
+            android:text="Login"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF" />
+
+    </LinearLayout>
 
     <ProgressBar
         android:id="@+id/progressBarLogin"
@@ -63,5 +108,15 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:visibility="gone" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:text="NIT3213 Android Application Development"
+        android:textColor="#8A7B93"
+        android:textSize="12sp" />
 
 </LinearLayout>

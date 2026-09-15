@@ -3,36 +3,72 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F7F9FC"
+    android:background="#F8F5FC"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:paddingStart="20dp"
+    android:paddingTop="24dp"
+    android:paddingEnd="20dp"
+    android:paddingBottom="12dp">
 
-    <!-- Screen heading and count of entities returned by the API. -->
+    <!-- Dashboard heading area. -->
     <TextView
         android:id="@+id/textViewDashboardTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Fitness Dashboard"
-        android:textColor="#1B1F23"
-        android:textSize="26sp"
+        android:textColor="#2D1B45"
+        android:textSize="28sp"
         android:textStyle="bold" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="Build strength. Track your exercises."
+        android:textColor="#67576F"
+        android:textSize="15sp" />
+
+    <!-- Entity count badge. Existing ID is retained for DashboardActivity. -->
     <TextView
         android:id="@+id/textViewEntityTotal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="16dp"
+        android:background="@android:drawable/alert_light_frame"
+        android:backgroundTint="#E9DCF7"
+        android:paddingStart="12dp"
+        android:paddingTop="7dp"
+        android:paddingEnd="12dp"
+        android:paddingBottom="7dp"
         android:text="Loading exercises..."
-        android:textColor="#5F6368"
-        android:textSize="15sp" />
+        android:textColor="#5A2677"
+        android:textSize="14sp"
+        android:textStyle="bold" />
 
-    <!-- Shown while GET /dashboard/fitness is loading. -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:text="Available exercises"
+        android:textColor="#2D1B45"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:text="Tap an exercise to view full details."
+        android:textColor="#67576F"
+        android:textSize="14sp" />
+
+    <!-- Shown while the dashboard API request is loading. -->
     <ProgressBar
         android:id="@+id/progressBarDashboard"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="24dp" />
+        android:layout_marginTop="28dp" />
 
     <!-- Shows a network/API error when dashboard data cannot be loaded. -->
     <TextView
@@ -40,8 +76,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:background="#FDE8E7"
+        android:padding="12dp"
         android:textColor="#B3261E"
-        android:textSize="16sp"
+        android:textSize="15sp"
         android:visibility="gone" />
 
     <!-- Required list of Dashboard entity summaries. -->
@@ -49,7 +87,9 @@
         android:id="@+id/recyclerViewExercises"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="12dp"
-        android:layout_weight="1" />
+        android:layout_marginTop="14dp"
+        android:layout_weight="1"
+        android:clipToPadding="false"
+        android:paddingBottom="12dp" />
 
 </LinearLayout>

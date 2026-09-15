@@ -3,79 +3,144 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F7F9FC"
+    android:background="#F8F5FC"
     android:fillViewport="true">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="20dp">
+        android:paddingStart="20dp"
+        android:paddingTop="24dp"
+        android:paddingEnd="20dp"
+        android:paddingBottom="28dp">
+
+        <!-- Navigation hint: Android's system Back gesture/button also works. -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#E9DCF7"
+            android:paddingStart="12dp"
+            android:paddingTop="7dp"
+            android:paddingEnd="12dp"
+            android:paddingBottom="7dp"
+            android:text="Exercise details"
+            android:textColor="#5A2677"
+            android:textSize="14sp"
+            android:textStyle="bold" />
 
         <!-- Selected exercise name. -->
         <TextView
             android:id="@+id/textViewDetailsExerciseName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="#1B1F23"
-            android:textSize="28sp"
+            android:layout_marginTop="12dp"
+            android:textColor="#2D1B45"
+            android:textSize="30sp"
             android:textStyle="bold" />
 
-        <!-- Exercise muscle group. -->
         <TextView
-            android:id="@+id/textViewDetailsMuscleGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Exercise information and training summary"
+            android:textColor="#67576F"
+            android:textSize="15sp" />
+
+        <!-- Card containing the exercise summary values. -->
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            android:textColor="#4A4F55"
-            android:textSize="17sp" />
+            android:background="#FFFFFF"
+            android:elevation="3dp"
+            android:orientation="vertical"
+            android:padding="20dp">
 
-        <!-- Required equipment. -->
-        <TextView
-            android:id="@+id/textViewDetailsEquipment"
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Training summary"
+                android:textColor="#2D1B45"
+                android:textSize="19sp"
+                android:textStyle="bold" />
+
+            <!-- Exercise muscle group. -->
+            <TextView
+                android:id="@+id/textViewDetailsMuscleGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="18dp"
+                android:textColor="#4A3D52"
+                android:textSize="16sp" />
+
+            <!-- Required equipment. -->
+            <TextView
+                android:id="@+id/textViewDetailsEquipment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:textColor="#4A3D52"
+                android:textSize="16sp" />
+
+            <!-- Exercise difficulty level. -->
+            <TextView
+                android:id="@+id/textViewDetailsDifficulty"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:textColor="#4A3D52"
+                android:textSize="16sp" />
+
+            <!-- Calories burned per hour. -->
+            <TextView
+                android:id="@+id/textViewDetailsCalories"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:textColor="#4A3D52"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+        <!-- Card containing the full description. -->
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:textColor="#4A4F55"
-            android:textSize="17sp" />
+            android:layout_marginTop="16dp"
+            android:background="#FFFFFF"
+            android:elevation="3dp"
+            android:orientation="vertical"
+            android:padding="20dp">
 
-        <!-- Exercise difficulty level. -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Description"
+                android:textColor="#2D1B45"
+                android:textSize="19sp"
+                android:textStyle="bold" />
+
+            <!-- Full description is intentionally shown here, not on Dashboard. -->
+            <TextView
+                android:id="@+id/textViewDetailsDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:lineSpacingExtra="5dp"
+                android:textColor="#4A3D52"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
         <TextView
-            android:id="@+id/textViewDetailsDifficulty"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:textColor="#4A4F55"
-            android:textSize="17sp" />
-
-        <!-- Calories burned per hour. -->
-        <TextView
-            android:id="@+id/textViewDetailsCalories"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:textColor="#4A4F55"
-            android:textSize="17sp" />
-
-        <!-- Description heading. -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
-            android:text="Description"
-            android:textColor="#1B1F23"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
-        <!-- Full description is intentionally displayed on Details, not Dashboard. -->
-        <TextView
-            android:id="@+id/textViewDetailsDescription"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:lineSpacingExtra="4dp"
-            android:textColor="#4A4F55"
-            android:textSize="17sp" />
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:text="Use the Back button to return to your exercises"
+            android:textColor="#8A7B93"
+            android:textSize="13sp" />
 
     </LinearLayout>
 
