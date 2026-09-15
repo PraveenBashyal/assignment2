@@ -1,11 +1,3 @@
-# S8133896Assignment2
-
-## Student Information
-
-- Student ID: S8133896
-- Student Name: Your Name
-- Unit: NIT3213 Android Application Development
-- Assignment: Final Assignment 2
 
 ## Application Overview
 
