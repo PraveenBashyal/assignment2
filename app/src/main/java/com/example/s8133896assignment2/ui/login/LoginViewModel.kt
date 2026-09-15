@@ -15,6 +15,9 @@ sealed interface LoginUiState {
     data class Error(val message: String) : LoginUiState
 }
 
+/**
+ * Holds the state and validation logic for the Login screen.
+ */
 class LoginViewModel(
     private val repository: AuthRepositoryInterface
 ) : ViewModel() {
@@ -22,12 +25,35 @@ class LoginViewModel(
     private val _uiState = MutableStateFlow<LoginUiState>(LoginUiState.Idle)
     val uiState: StateFlow<LoginUiState> = _uiState.asStateFlow()
 
+    /**
+     * Validates login input before making the authentication API request.
+     */
     fun login(studentId: String, firstName: String) {
+        val trimmedStudentId = studentId.trim()
+        val trimmedFirstName = firstName.trim()
+
+        if (trimmedStudentId.isEmpty()) {
+            _uiState.value = LoginUiState.Error(
+                message = "Please enter your student ID."
+            )
+            return
+        }
+
+        if (trimmedFirstName.isEmpty()) {
+            _uiState.value = LoginUiState.Error(
+                message = "Please enter your first name."
+            )
+            return
+        }
+
         viewModelScope.launch {
             _uiState.value = LoginUiState.Loading
 
             try {
-                val response = repository.login(studentId, firstName)
+                val response = repository.login(
+                    studentId = trimmedStudentId,
+                    firstName = trimmedFirstName
+                )
 
                 if (response.isSuccessful && response.body() != null) {
                     _uiState.value = LoginUiState.Success(

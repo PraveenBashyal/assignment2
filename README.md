@@ -223,6 +223,23 @@ Manual test cases include:
  Open Details screen -> All entity fields and full description are displayed 
  Press Back on Details screen -> User returns to Dashboard 
 
+
+
+Local unit tests are included for `LoginViewModel`.
+
+The tests verify that:
+
+- A blank student ID produces the message: `Please enter your student ID.`
+- A blank first name produces the message: `Please enter your first name.`
+
+The tests use a fake implementation of `AuthRepositoryInterface`. This isolates the ViewModel from Retrofit and the live NIT3213 API, so no network request is made while unit tests run.
+
+To run the tests in Android Studio:
+
+1. Open `LoginViewModelTest.kt` under `app/src/test/java`.
+2. Click the green run icon next to `LoginViewModelTest`.
+3. Select Run 'LoginViewModelTest'
+
 ## Git Version Control
 
 Git was used throughout development to maintain version history. Meaningful commits were created for major features, including API integration, dashboard display, details navigation, dependency injection, and ViewModel refactoring.
@@ -232,3 +249,5 @@ Git was used throughout development to maintain version history. Meaningful comm
 This repository contains the complete Android Studio project for the NIT3213 Final Assignment.
 
 To run the project, follow the build and run instructions above.
+
+

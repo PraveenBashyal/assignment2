@@ -35,6 +35,8 @@ android {
 
 dependencies {
 
+    testImplementation("junit:junit:4.13.2")
+
 
 
     implementation(libs.androidx.activity.ktx)
@@ -60,4 +62,5 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(libs.androidx.junit)
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.8.1")
 }
