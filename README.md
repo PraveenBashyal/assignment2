@@ -33,36 +33,7 @@ The application connects to the NIT3213 API to authenticate a user, retrieve a d
 - Displays the full detailed exercise description.
 - Includes exercise name, muscle group, equipment, difficulty, calories burned per hour, and description.
 
-## API Integration
 
-Base URL:
-
-```text
-[https://nit3213apinew.onrender.com/](https://nit3213apinew.onrender.com/)
-```
-
-Authentication endpoint:
-
-```text
-POST /footscray/auth
-```
-
-Request body format:
-
-```json
-{
-  "username": "8133896",
-  "password": "FirstName"
-}
-```
-
-Dashboard endpoint:
-
-```text
-GET /dashboard/{keypass}
-```
-
-The `keypass` returned by the authentication response is passed to the dashboard endpoint to retrieve the exercise data.
 
 ## Technologies Used
 
@@ -236,7 +207,6 @@ To run the tests in Android Studio:
 
 Git was used throughout development to maintain version history. Meaningful commits were created for major features, including API integration, dashboard display, details navigation, dependency injection, and ViewModel refactoring.
 
-## Submission
 
 This repository contains the complete Android Studio project for the NIT3213 Final Assignment.
 
